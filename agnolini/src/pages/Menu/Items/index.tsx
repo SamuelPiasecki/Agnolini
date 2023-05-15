@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import menu from './items.json';
+import menu from 'data/menu.json';
 import Item from './Item';
 import styles from './Items.module.scss';
+import { Menu } from 'types/Dish';
 
 interface Props {
     search: string,
@@ -24,34 +25,32 @@ export default function Items(props : Props){
         return true;
     }
 
-    function sorting(newList: typeof menu){
+    function sorting(newList: Menu){
         switch(sort){
-            case 'portion':
-                return newList.sort((a, b) => a.size > b.size ? 1 : -1)
-            case 'qt_people':
-                return newList.sort((a, b) => a.serving > b.serving ? 1 : -1)
-            case 'price':
-                return newList.sort((a, b) => a.price > b.price ? 1 : -1)
-            default:
-                return newList;
+        case 'portion':
+            return newList.sort((a, b) => a.size > b.size ? 1 : -1);
+        case 'qt_people':
+            return newList.sort((a, b) => a.serving > b.serving ? 1 : -1);
+        case 'price':
+            return newList.sort((a, b) => a.price > b.price ? 1 : -1);
+        default:
+            return newList;
         }
     }
 
     useEffect(() => {
         const newList = menu.filter(item => testSearch(item.title) && testFilter(item.category.id));
         setList(sorting(newList));
-    }, [search, filter, sort])
+    }, [search, filter, sort]);
 
     return(
         <div className={styles.items}>
             {list.map((item) => (
-                <div>
-                    <Item 
-                        key={item.id} 
-                        {...item}
-                    />
-                </div>
+                <Item 
+                    key={item.id} 
+                    {...item}
+                />
             ))}
         </div>
-    )
+    );
 }

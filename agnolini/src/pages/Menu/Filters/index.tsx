@@ -31,5 +31,5 @@ export default function Filters({ filter, setFilter } : Props){
                 </button>
             ))}
         </div>
-    )
+    );
 }

@@ -12,7 +12,7 @@ interface Props {
 export default function Sort({ sort, setSort } : Props){
 
     const [open, setOpen] = useState(false);
-    const nameSort = sort && options.find(option => option.value === sort)?.name
+    const nameSort = sort && options.find(option => option.value === sort)?.name;
 
     return(
         <button 
@@ -40,5 +40,5 @@ export default function Sort({ sort, setSort } : Props){
                 ))}
             </div>
         </button>
-    )
+    );
 }
